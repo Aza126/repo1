@@ -1,0 +1,16 @@
+# Bỏ qua môi trường ảo Python
+venv/
+env/
+.venv/
+
+# Bỏ qua các file cache của Python
+__pycache__/
+*.pyc
+
+# Bỏ qua các tập dữ liệu thô và cơ sở dữ liệu cục bộ
+*.csv
+*.db
+*.sqlite3
+
+# Bỏ qua các file cấu hình hệ điều hành (rất hay xuất hiện trên macOS)
+.DS_Store
