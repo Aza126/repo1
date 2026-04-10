@@ -6,6 +6,8 @@ env/
 # Bỏ qua các file cache của Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # Bỏ qua các tập dữ liệu thô và cơ sở dữ liệu cục bộ
 *.csv
