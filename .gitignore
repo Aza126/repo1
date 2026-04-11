@@ -12,6 +12,7 @@ __pycache__/
 # Bỏ qua các tập dữ liệu thô và cơ sở dữ liệu cục bộ
 *.csv
 !raw_aqi_data.csv
+!processed_aqi_data.csv
 *.db
 *.sqlite3
 
