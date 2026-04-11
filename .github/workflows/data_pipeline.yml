@@ -29,11 +29,14 @@ jobs:
       - name: Chạy file Python để làm sạch dữ liệu (Kịch bản 2)
         run: python data_preprocessing.py
 
-      - name: Lưu và đẩy file CSV mới lên GitHub
+      - name: Chạy mô hình để đưa ra dự báo (Inference)
+        run: python inference.py
+
+      - name: Lưu và đẩy TẤT CẢ file CSV mới lên GitHub
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add raw_aqi_data.csv processed_aqi_data.csv
-          git commit -m "Tự động cập nhật và làm sạch dữ liệu AQI thời gian thực" || echo "Không có dữ liệu mới để cập nhật"
-          git pull --rebase origin main # Kéo về những thay đổi mới nhất từ nhánh chính để tránh xung đột
+          git commit -m "Tự động cập nhật dữ liệu và dự báo AQI" || echo "Không có dữ liệu mới"
+          git pull --rebase origin main
           git push
