@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import joblib
 
 def create_lag_features(df, target_col='AQI', lags=3):
     """
@@ -63,6 +64,9 @@ def train_and_evaluate_rf(filepath):
     grid_search.fit(X_train, y_train)
     best_rf = grid_search.best_estimator_
     print(f"   -> Siêu tham số tối ưu tìm được: {grid_search.best_params_}")
+
+    joblib.dump(best_rf, 'rf_model.pkl')
+    print("   -> Đã xuất mô hình ra file 'rf_model.pkl' thành công!")
 
     # ---------------------------------------------------------
     # TRỌNG ĐIỂM 3: ĐÁNH GIÁ HIỆU NĂNG BẰNG CÁC THƯỚC ĐO CHUẨN
