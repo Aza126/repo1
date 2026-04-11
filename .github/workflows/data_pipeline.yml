@@ -1,0 +1,36 @@
+name: Tu Dong Nap Du Lieu AQI
+
+# 1. Lên lịch chạy
+on:
+  schedule:
+    - cron: '0 * * * *' # Chạy vào phút thứ 0 của mỗi giờ (ví dụ: 1:00, 2:00, 3:00)
+  workflow_dispatch: # Cho phép bạn bấm nút chạy bằng tay trên web để test
+
+# 2. Các bước thực hiện
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest # Mượn một máy chủ Linux ảo miễn phí của GitHub
+
+    steps:
+      - name: Tải mã nguồn về máy ảo
+        uses: actions/checkout@v4
+
+      - name: Cài đặt môi trường Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cài đặt các thư viện cần thiết
+        run: pip install -r requirements.txt
+
+      - name: Chạy file Python để kéo dữ liệu
+        run: python data_ingestion.py
+
+      - name: Lưu và đẩy file CSV mới lên GitHub
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add raw_aqi_data.csv
+          # Lệnh dưới đây sẽ commit nếu có thay đổi, nếu không có thay đổi thì bỏ qua để không báo lỗi
+          git commit -m "Tự động cập nhật dữ liệu AQI thời gian thực" || echo "Không có dữ liệu mới để cập nhật"
+          git push
