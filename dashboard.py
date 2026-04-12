@@ -111,8 +111,16 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("🗺️ Bản đồ Nhiệt Không gian - Thời gian (Spatio-temporal Heatmap)")
 st.markdown("Sự di chuyển, tích tụ và tan biến của các khối mây ô nhiễm PM2.5 theo từng giờ.")
 
-# Khởi tạo bản đồ nền Leaflet.js
-m = folium.Map(location=[20.9716, 105.7725], zoom_start=12, tiles="CartoDB positron")
+# THÊM ĐOẠN NÀY VÀO: Đổi tọa độ trung tâm bản đồ dựa theo Sidebar
+if selected_station == "Hà Đông, Hà Nội":
+    map_center = [20.9716, 105.7725]  # Tọa độ Hà Đông
+else:
+    map_center = [21.0362, 105.7905]  # Tọa độ Cầu Giấy
+
+# Khởi tạo bản đồ nền Leaflet.js với tọa độ động
+m = folium.Map(location=map_center, zoom_start=13, tiles="CartoDB positron")
+
+# (Giữ nguyên phần code vòng lặp tạo heat_data ở dưới của bạn...)
 
 # Tái cấu trúc dữ liệu thành chuỗi mảng 3 chiều (List of Lists of Lists) cho HeatMapWithTime
 # (Giả lập lưới tọa độ 3 điểm xung quanh Hà Đông thay đổi theo thời gian)
