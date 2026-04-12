@@ -105,6 +105,10 @@ predict_col = 'AQI_RF_Predict' if selected_model == "Random Forest" else 'AQI_LS
 fig.add_trace(go.Scatter(x=df['time'], y=df[predict_col], mode='lines+markers', name=f'Dự báo ({selected_model})', line=dict(color='red', dash='dash')))
 
 fig.update_layout(height=400, hovermode="x unified", margin=dict(l=0, r=0, t=30, b=0))
+
+# Cố định thang đo trục Y từ 0 đến 300 (hoặc 500 tùy bạn) để không bị nhảy khung hình
+fig.update_yaxes(range=[0, 300])
+
 st.plotly_chart(fig, use_container_width=True)
 
 # ---------------------------------------------------------
