@@ -100,9 +100,15 @@ fig.add_trace(go.Scatter(x=df['time'], y=df['AQI'], mode='lines+markers', name='
 
 # Đường Dự báo (Thay đổi theo Sidebar)
 predict_col = 'AQI_RF_Predict' if selected_model == "Random Forest" else 'AQI_LSTM_Predict'
-fig.add_trace(go.Scatter(x=df['time'], y=df[predict_col], mode='lines', name=f'Dự báo ({selected_model})', line=dict(color='red', dash='dash')))
+
+# ĐỔI mode='lines' THÀNH mode='lines+markers' Ở DÒNG DƯỚI ĐÂY
+fig.add_trace(go.Scatter(x=df['time'], y=df[predict_col], mode='lines+markers', name=f'Dự báo ({selected_model})', line=dict(color='red', dash='dash')))
 
 fig.update_layout(height=400, hovermode="x unified", margin=dict(l=0, r=0, t=30, b=0))
+
+# Cố định thang đo trục Y từ 0 đến 300 (hoặc 500 tùy bạn) để không bị nhảy khung hình
+fig.update_yaxes(range=[0, 300])
+
 st.plotly_chart(fig, use_container_width=True)
 
 # ---------------------------------------------------------
@@ -111,8 +117,16 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("🗺️ Bản đồ Nhiệt Không gian - Thời gian (Spatio-temporal Heatmap)")
 st.markdown("Sự di chuyển, tích tụ và tan biến của các khối mây ô nhiễm PM2.5 theo từng giờ.")
 
-# Khởi tạo bản đồ nền Leaflet.js
-m = folium.Map(location=[20.9716, 105.7725], zoom_start=12, tiles="CartoDB positron")
+# THÊM ĐOẠN NÀY VÀO: Đổi tọa độ trung tâm bản đồ dựa theo Sidebar
+if selected_station == "Hà Đông, Hà Nội":
+    map_center = [20.9716, 105.7725]  # Tọa độ Hà Đông
+else:
+    map_center = [21.0362, 105.7905]  # Tọa độ Cầu Giấy
+
+# Khởi tạo bản đồ nền Leaflet.js với tọa độ động
+m = folium.Map(location=map_center, zoom_start=13, tiles="CartoDB positron")
+
+# (Giữ nguyên phần code vòng lặp tạo heat_data ở dưới của bạn...)
 
 # Tái cấu trúc dữ liệu thành chuỗi mảng 3 chiều (List of Lists of Lists) cho HeatMapWithTime
 # (Giả lập lưới tọa độ 3 điểm xung quanh Hà Đông thay đổi theo thời gian)
