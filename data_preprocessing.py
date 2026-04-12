@@ -65,15 +65,38 @@ def load_and_clean_data(filepath):
 
 if __name__ == "__main__":
     try:
-        # Chạy hàm xử lý
+        # Chạy hàm xử lý để có dữ liệu sạch mới nhất
         processed_df = load_and_clean_data("raw_aqi_data.csv")
         
-        # Lưu ra một file mới dành riêng cho Machine Learning
+        # ========================================================
+        # ĐOẠN CODE CỨU HỘ: BẢO TOÀN LỊCH SỬ DỰ BÁO CỦA AI (UPSERT)
+        # ========================================================
+        try:
+            print("6. Đang kiểm tra và bảo tồn lịch sử dự báo cũ...")
+            # Đọc lại file processed cũ để "cứu" lịch sử
+            old_processed = pd.read_csv('processed_aqi_data.csv')
+            
+            # Chỉ trích xuất cột thời gian và 2 cột dự báo
+            old_predictions = old_processed[['time', 'AQI_RF_Predict', 'AQI_LSTM_Predict']]
+            
+            # Đảm bảo 2 cột time cùng định dạng datetime trước khi nối để không bị lệch
+            processed_df['time'] = pd.to_datetime(processed_df['time'])
+            old_predictions['time'] = pd.to_datetime(old_predictions['time'])
+            
+            # Nối (Left Join) các cột dự báo cũ sang bảng dữ liệu mới
+            processed_df = pd.merge(processed_df, old_predictions, on='time', how='left')
+            print("🔄 Đã ghép nối thành công lịch sử dự báo cũ!")
+        except (FileNotFoundError, KeyError):
+            # Nếu chạy lần đầu chưa có file hoặc chưa có cột dự báo thì bỏ qua
+            print("🆕 Chạy lần đầu hoặc chưa có lịch sử dự báo. Đang tạo mới...")
+        # ========================================================
+        
+        # Lưu ra file mới (lúc này đã có cả data mới và lịch sử dự báo cũ)
         processed_df.to_csv("processed_aqi_data.csv", index=False)
         
-        print("\n✅ Hoàn tất! Xem thử 5 dòng dữ liệu đã qua tiền xử lý:")
-        # Chỉ in ra một số cột quan trọng để dễ nhìn
-        print(processed_df[['time', 'pm2_5', 'AQI', 'hour_sin', 'hour_cos']].head())
+        print("\n✅ Hoàn tất! Xem thử 5 dòng dữ liệu MỚI NHẤT (Tail):")
+        # In tail() thay vì head() để thấy rõ dòng hiện tại các cột Predict đang bị trống (NaN) chờ AI điền vào
+        print(processed_df[['time', 'AQI', 'AQI_RF_Predict', 'AQI_LSTM_Predict']].tail())
         print("\n💾 Đã lưu thành công ra file 'processed_aqi_data.csv'")
         
     except FileNotFoundError:
