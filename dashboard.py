@@ -100,7 +100,9 @@ fig.add_trace(go.Scatter(x=df['time'], y=df['AQI'], mode='lines+markers', name='
 
 # Đường Dự báo (Thay đổi theo Sidebar)
 predict_col = 'AQI_RF_Predict' if selected_model == "Random Forest" else 'AQI_LSTM_Predict'
-fig.add_trace(go.Scatter(x=df['time'], y=df[predict_col], mode='lines', name=f'Dự báo ({selected_model})', line=dict(color='red', dash='dash')))
+
+# ĐỔI mode='lines' THÀNH mode='lines+markers' Ở DÒNG DƯỚI ĐÂY
+fig.add_trace(go.Scatter(x=df['time'], y=df[predict_col], mode='lines+markers', name=f'Dự báo ({selected_model})', line=dict(color='red', dash='dash')))
 
 fig.update_layout(height=400, hovermode="x unified", margin=dict(l=0, r=0, t=30, b=0))
 st.plotly_chart(fig, use_container_width=True)
