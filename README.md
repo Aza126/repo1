@@ -29,7 +29,7 @@ Dự án được chia thành các kịch bản (scripts) chạy tuần tự:
 
 ## 🚀 Hướng dẫn Cài đặt & Khởi chạy
 
-Chúng tôi cung cấp 2 cách để chạy dự án này, từ dễ đến chuyên sâu.
+Chúng tôi cung cấp 2 cách để chạy dự án này.
 
 ### Cách 1: Chạy ngay trên Đám mây (Khuyên dùng - Không cần cài đặt)
 Dự án đã được tích hợp sẵn cấu hình **DevContainers**. Bạn không cần máy tính cấu hình cao.
@@ -37,7 +37,7 @@ Dự án đã được tích hợp sẵn cấu hình **DevContainers**. Bạn kh
 2. Đợi khoảng 1-2 phút. Hệ thống sẽ tự động tạo máy ảo ảo, cài đặt toàn bộ thư viện trong `requirements.txt` và tự động bật trình duyệt Web hiển thị Dashboard.
 
 ### Cách 2: Chạy trên Máy tính cá nhân (Local)
-Yêu cầu hệ thống đã cài đặt Python 3.11+.
+Yêu cầu hệ thống đã cài đặt Python 3.12+.
 
 **Bước 1: Tải mã nguồn về máy**
 ```bash
