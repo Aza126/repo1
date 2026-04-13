@@ -41,7 +41,7 @@ Yêu cầu hệ thống đã cài đặt Python 3.11+.
 
 **Bước 1: Tải mã nguồn về máy**
 ```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+git clone https://github.com/Aza126/repo1
 cd your-repo-name
 # Tạo môi trường
 python -m venv .venv
