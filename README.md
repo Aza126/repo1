@@ -1,6 +1,6 @@
 # 🌍 Hệ thống Giám sát & Dự báo Chất lượng Không khí (AQI) Thời gian thực
 
-![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-Deep_Learning-orange.svg)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-success.svg)
@@ -43,3 +43,23 @@ Yêu cầu hệ thống đã cài đặt Python 3.11+.
 ```bash
 git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
 cd your-repo-name
+# Tạo môi trường
+python -m venv .venv
+```
+
+**Bước 2: Tạo và kích hoạt môi trường ảo**
+```bash
+# Kích hoạt (Mac/Linux)
+source .venv/bin/activate
+# Kích hoạt (Windows)
+.venv\Scripts\activate
+```
+**Bước 3: Cài đặt thư viện**
+```bash
+pip install -r requirements.txt
+```
+
+**Bước 4: Khởi chạy Dashboard**
+```bash
+python -m streamlit run dashboard.py
+```
