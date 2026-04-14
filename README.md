@@ -49,9 +49,9 @@ python -m venv .venv
 
 **Bước 2: Tạo và kích hoạt môi trường ảo**
 ```bash
-# Kích hoạt (Mac/Linux)
+# Mac/Linux
 source .venv/bin/activate
-# Kích hoạt (Windows)
+# Windows
 .venv\Scripts\activate
 ```
 **Bước 3: Cài đặt thư viện**
