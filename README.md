@@ -5,7 +5,7 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-Deep_Learning-orange.svg)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-success.svg)
 
-## 📖 Giới thiệu Dự án - AI làm, mn thông cảm
+## 📖 Giới thiệu Dự án - AI làm
 Dự án này là một hệ thống dữ liệu khép kín (End-to-End Data Pipeline) được xây dựng để thu thập, xử lý, dự báo và trực quan hóa Chỉ số Chất lượng Không khí (AQI) theo thời gian thực. 
 
 Thay vì sử dụng các tập dữ liệu tĩnh (file CSV tải sẵn), hệ thống được tự động hóa hoàn toàn bằng **GitHub Actions**, hoạt động bền bỉ 24/7 để cập nhật số liệu mới nhất mỗi giờ, đồng thời sử dụng Trí tuệ Nhân tạo để dự báo xu hướng ô nhiễm trong tương lai.
